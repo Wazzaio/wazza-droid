@@ -1,16 +1,15 @@
 package com.wazza.android.sdk.service;
 
-import java.util.UUID;
-
 import com.wazza.android.sdk.domain.Device;
 
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import java.util.UUID;
 
 public class DeviceService {
 
-	private Device device = new Device();
+	private Device device;
 	private Context context;
 	private TelephonyManager tm;
 
@@ -54,11 +53,15 @@ public class DeviceService {
 		device.setDeviceUUID(new UUID(device.getAndroidID().hashCode(), ((long)device.getTmDevice().hashCode() << 32) | device.getSimSerial().hashCode()));
 	}
 
-
-
 	public DeviceService(Context context) {
 		this.context = context;
-		//tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		device = new Device();
+		tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		
+		setAndroidVersion();
+		setDeviceID();
+		setDeviceModel();
+		
 	}
 
 }
