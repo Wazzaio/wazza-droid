@@ -2,9 +2,18 @@ package com.wazza.android.sdk.service;
 
 import android.text.format.Time;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Util {
 
-	
+    public static String appName;
+    public static String username;
+
+	public static long getSessionLenght(Date originalTime){
+        return Calendar.getInstance().getTime().getTime() - originalTime.getTime();
+    }
+
 	public static String getCurrentTime(){
 		Time now = new Time();
 		now.setToNow();

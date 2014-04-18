@@ -1,5 +1,7 @@
 package com.wazza.android.sdk.domain;
 
+import org.json.JSONObject;
+
 import java.util.UUID;
 
 public class Device {
@@ -89,5 +91,19 @@ public class Device {
 	public void setDeviceUUID(UUID deviceUUID) {
 		this.deviceUUID = deviceUUID;
 	}
-	
+
+    public JSONObject deviceToJson(){
+        JSONObject deviceJson = new JSONObject();
+        try {
+            //TODO: add relevant fields.
+            deviceJson.put("osName", getAndroidID());
+            deviceJson.put("osVersion", getBuildRelease());
+            deviceJson.put("deviceModel", getManufacturer() + getModel());
+            deviceJson.put("osType", "android");
+        }
+        catch (Exception e){
+            //tba
+        }
+        return deviceJson;
+    }
 }
