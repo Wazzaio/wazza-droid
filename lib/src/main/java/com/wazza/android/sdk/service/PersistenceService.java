@@ -67,17 +67,15 @@ public class PersistenceService {
             locationService = new LocationService(context);
             commService = new CommunicationService(context, this);
 
-            // Serialize the object into a string
-            String serializedData = myData.serialize();
-
-
+            // Serialize the object and import it into SharedPreferences
             SharedPreferences.Editor editor = preferencesReader.edit();
-            editor.putString(PREFS_KEY, serializedData);
+            editor.putString(APP_KEY, appService.getApplication().serialize());
+            editor.putString(DEVICE_KEY, deviceService.getDevice().serialize());
+            editor.putString(USER_KEY, userService.getUser().serialize());
+            //editor.putString(COMM_KEY, commService.getCommunication().serialize());
             editor.commit();
 
-
         }
-
 
     }
 

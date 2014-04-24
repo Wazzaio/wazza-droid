@@ -52,7 +52,7 @@ public class CommunicationService {
                 try {
                     for(int i = 0; i < results.length(); i++){
                         JSONObject object = results.getJSONObject(i);
-                        persist.createItemFromJson(object);
+                        //persist.createItemFromJson(object);
                     }
                 }
                 catch (Exception e){

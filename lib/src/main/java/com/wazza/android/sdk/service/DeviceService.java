@@ -10,10 +10,14 @@ import java.util.UUID;
 
 public class DeviceService {
 
-	private Device device;
+    private Device device;
 	private Context context;
 	private TelephonyManager tm;
 
+
+    public Device getDevice() {
+        return device;
+    }
 
 	public void setDeviceModel() {
 		String manufacturer = Build.MANUFACTURER;

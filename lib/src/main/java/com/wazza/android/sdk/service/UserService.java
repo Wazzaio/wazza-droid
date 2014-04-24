@@ -12,7 +12,12 @@ import java.util.List;
 public class UserService {
 
 	private Context context;
-	private User user;
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
 
 	public void setUsername(){
 		String username;

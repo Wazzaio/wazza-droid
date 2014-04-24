@@ -7,9 +7,14 @@ import com.wazza.android.sdk.domain.Application;
 public class ApplicationService {
 	
 	private Context context;
-	private Application application;
-	
-	public void setApplicationName() {
+
+    private Application application;
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplicationName() {
         /*
         final PackageManager pm = getApplicationContext().getPackageManager();
         ApplicationInfo ai;
