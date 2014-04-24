@@ -33,4 +33,9 @@ public class ApplicationService {
 		application = new Application();
 		setApplicationName();
 	}
+
+    public ApplicationService(Context context, Application application) {
+        this.context = context;
+        this.application = application;
+    }
 }

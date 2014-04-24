@@ -7,6 +7,7 @@ import com.wazza.android.sdk.service.CommunicationService;
 import com.wazza.android.sdk.service.DeviceService;
 import com.wazza.android.sdk.service.LocationService;
 import com.wazza.android.sdk.service.PersistenceService;
+import com.wazza.android.sdk.service.ServiceDispatcher;
 import com.wazza.android.sdk.service.UserService;
 import com.wazza.android.sdk.service.Util;
 
@@ -19,19 +20,14 @@ public class Wazza{
 
     private final Date sessionStart;
     private final String secret;
+    private final ServiceDispatcher serviceDispatcher;
 
-	private ApplicationService app;
-	private DeviceService device;
-	private UserService user;
-	private LocationService location;
-    private CommunicationService comm;
-    private PersistenceService persist;
-
+/*
 	//debug
 	public String getDevice(){
 		return app.getApplicationName() + "\n" + device.getAndroidVersion() + "\n" + user.getUsername() + "\n" + location.getLocation();
 	}
-
+*/
 	//initializer and constructor
 	public static Wazza init(Context context, String secret, String appName, String companyName){
 		//poor's man singleton
@@ -41,7 +37,7 @@ public class Wazza{
         //all the required setup
         //bring session up
         //retrieve items
-        self.comm.fetchItems();
+  //      self.comm.fetchItems();
 
 		return self;
 	}
@@ -51,15 +47,17 @@ public class Wazza{
         this.secret = secret;
         this.sessionStart = Calendar.getInstance().getTime();
 
+        /*persist = new PersistenceService(context);
 		app = new ApplicationService(context);
 		device = new DeviceService(context);
 		user = new UserService(context);
 		location = new LocationService(context);
         comm = new CommunicationService(context, persist);
-
+*/
+        serviceDispatcher = new ServiceDispatcher(context);
         Util.appName = appName;//app.getApplicationName();
         Util.companyName = companyName;
-        Util.username = user.getUsername();
+  //      Util.username = user.getUsername();
 	}
 
 }

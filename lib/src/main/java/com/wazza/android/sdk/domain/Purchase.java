@@ -2,6 +2,7 @@ package com.wazza.android.sdk.domain;
 
 import android.location.Location;
 
+import com.google.gson.Gson;
 import com.wazza.android.sdk.service.SecurityService;
 import com.wazza.android.sdk.service.Util;
 
@@ -10,9 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by duarte on 4/17/14.
- */
 public class Purchase {
 
     private String id;
@@ -121,5 +119,17 @@ public class Purchase {
         //setLocation();
 
         setId(SecurityService.hash(appName + itemId + time + deviceInfo.hashCode()).toString());
+    }
+
+    public String serialize() {
+        // Serialize this class into a JSON string using GSON
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static Purchase create(String serializedData) {
+        // Use GSON to instantiate this class using the JSON representation of the state
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, Purchase.class);
     }
 }

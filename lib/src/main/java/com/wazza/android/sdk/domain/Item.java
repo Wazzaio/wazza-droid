@@ -1,8 +1,7 @@
 package com.wazza.android.sdk.domain;
 
-/**
- * Created by duarte on 4/17/14.
- */
+import com.google.gson.Gson;
+
 public class Item {
 
     private String id;
@@ -43,4 +42,15 @@ public class Item {
         this.currency = currency;
     }
 
+    public String serialize() {
+        // Serialize this class into a JSON string using GSON
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static Item create(String serializedData) {
+        // Use GSON to instantiate this class using the JSON representation of the state
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, Item.class);
+    }
 }
