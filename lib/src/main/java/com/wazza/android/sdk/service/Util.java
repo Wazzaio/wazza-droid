@@ -8,6 +8,7 @@ import java.util.Date;
 public class Util {
 
     public static String appName;
+    public static String companyName;
     public static String username;
 
 	public static long getSessionLenght(Date originalTime){

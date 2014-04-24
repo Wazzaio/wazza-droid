@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Wazza wazza = Wazza.init(this);
+        Wazza wazza = Wazza.init(this, "coco", "testbed", "wazza");
 
         TextView text = (TextView) findViewById(R.id.textview1);
         text.setText(wazza.getDevice());

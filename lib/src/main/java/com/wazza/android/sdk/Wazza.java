@@ -33,10 +33,10 @@ public class Wazza{
 	}
 
 	//initializer and constructor
-	public static Wazza init(Context context, String secret){
+	public static Wazza init(Context context, String secret, String appName, String companyName){
 		//poor's man singleton
 		if(self == null)
-			self = new Wazza(context, secret);
+			self = new Wazza(context, secret, appName, companyName);
 
         //all the required setup
         //bring session up
@@ -46,7 +46,7 @@ public class Wazza{
 		return self;
 	}
 	
-	private Wazza(Context context, String secret){
+	private Wazza(Context context, String secret, String appName, String companyName){
 		System.out.println(Util.getCurrentTime());
         this.secret = secret;
         this.sessionStart = Calendar.getInstance().getTime();
@@ -57,7 +57,8 @@ public class Wazza{
 		location = new LocationService(context);
         comm = new CommunicationService(context, persist);
 
-        Util.appName = app.getApplicationName();
+        Util.appName = appName;//app.getApplicationName();
+        Util.companyName = companyName;
         Util.username = user.getUsername();
 	}
 
