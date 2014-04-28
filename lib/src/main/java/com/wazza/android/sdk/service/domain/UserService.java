@@ -1,4 +1,4 @@
-package com.wazza.android.sdk.service;
+package com.wazza.android.sdk.service.domain;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;

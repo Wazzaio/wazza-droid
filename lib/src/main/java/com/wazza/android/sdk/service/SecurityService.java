@@ -1,8 +1,5 @@
 package com.wazza.android.sdk.service;
 
-/**
- * Created by duarte on 4/18/14.
- */
 import android.util.Base64;
 
 import java.io.ByteArrayInputStream;

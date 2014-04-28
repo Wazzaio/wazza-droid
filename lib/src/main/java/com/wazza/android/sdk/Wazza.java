@@ -1,63 +1,67 @@
 package com.wazza.android.sdk;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.wazza.android.sdk.service.ApplicationService;
-import com.wazza.android.sdk.service.CommunicationService;
-import com.wazza.android.sdk.service.DeviceService;
-import com.wazza.android.sdk.service.LocationService;
+import com.wazza.android.sdk.service.ItemService;
 import com.wazza.android.sdk.service.PersistenceService;
-import com.wazza.android.sdk.service.ServiceDispatcher;
-import com.wazza.android.sdk.service.UserService;
+import com.wazza.android.sdk.service.PurchaseService;
+import com.wazza.android.sdk.service.Session;
 import com.wazza.android.sdk.service.Util;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class Wazza{
 	
 	private static Wazza self;
 
-    private final Date sessionStart;
     private final String secret;
-    private final ServiceDispatcher serviceDispatcher;
+    private final PersistenceService persist;
+    private final PurchaseService purchase;
+    private final ItemService item;
+    private final Session session;
 
-/*
-	//debug
-	public String getDevice(){
-		return app.getApplicationName() + "\n" + device.getAndroidVersion() + "\n" + user.getUsername() + "\n" + location.getLocation();
-	}
-*/
+    public static String appName;
+    public static String companyName;
+    //private static String username;
+
+    public void sessionOpen(){
+        session.initSession(); //or resume if it's still inside of the timeframe
+        flush();
+
+        item.fetchItems();
+    }
+
+    public void sessionClose(){
+        flush();
+        session.closeSession();
+    }
+
+    public void flush(){
+
+    }
+
+    //track special event/attribute. tbd.
+    public void track(){
+
+    }
+
 	//initializer and constructor
 	public static Wazza init(Context context, String secret, String appName, String companyName){
 		//poor's man singleton
 		if(self == null)
 			self = new Wazza(context, secret, appName, companyName);
-
-        //all the required setup
-        //bring session up
-        //retrieve items
-  //      self.comm.fetchItems();
-
-		return self;
+    	return self;
 	}
 	
 	private Wazza(Context context, String secret, String appName, String companyName){
-		System.out.println(Util.getCurrentTime());
-        this.secret = secret;
-        this.sessionStart = Calendar.getInstance().getTime();
+        Log.v("WazzaSDK", Util.getCurrentTime());
 
-        /*persist = new PersistenceService(context);
-		app = new ApplicationService(context);
-		device = new DeviceService(context);
-		user = new UserService(context);
-		location = new LocationService(context);
-        comm = new CommunicationService(context, persist);
-*/
-        serviceDispatcher = new ServiceDispatcher(context);
-        Util.appName = appName;//app.getApplicationName();
-        Util.companyName = companyName;
-  //      Util.username = user.getUsername();
+        this.secret = secret;
+        this.appName = appName; //app.getApplicationName();
+        this.companyName = companyName;
+        this.persist = new PersistenceService(context);
+        this.item = new ItemService(persist);
+        this.session = new Session();
+        this.purchase = new PurchaseService();
 	}
 
 }

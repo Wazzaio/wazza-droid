@@ -1,6 +1,8 @@
-package com.wazza.android.sdk.service;
+package com.wazza.android.sdk.service.domain;
 
 import android.content.Context;
+
+import com.wazza.android.sdk.service.GPSTracker;
 
 public class LocationService {
 

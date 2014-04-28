@@ -1,4 +1,4 @@
-package com.wazza.android.sdk.service;
+package com.wazza.android.sdk.service.domain;
 
 import android.content.Context;
 

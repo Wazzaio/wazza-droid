@@ -2,17 +2,21 @@ package com.wazza.android.sdk.service;
 
 import android.text.format.Time;
 
+import com.loopj.android.http.RequestParams;
+import com.wazza.android.sdk.Wazza;
+
 import java.util.Calendar;
 import java.util.Date;
 
 public class Util {
 
-    public static String appName;
-    public static String companyName;
-    public static String username;
 
-	public static long getSessionLenght(Date originalTime){
-        return Calendar.getInstance().getTime().getTime() - originalTime.getTime();
+    protected static RequestParams constructRequestHeader(){
+        RequestParams params = new RequestParams();
+        params.put("AppName", Wazza.appName);
+        //todo: add security headers
+
+        return params;
     }
 
 	public static String getCurrentTime(){

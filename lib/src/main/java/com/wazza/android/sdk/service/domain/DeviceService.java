@@ -1,10 +1,11 @@
-package com.wazza.android.sdk.service;
+package com.wazza.android.sdk.service.domain;
 
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
 import com.wazza.android.sdk.domain.Device;
+import com.wazza.android.sdk.service.Util;
 
 import java.util.UUID;
 
