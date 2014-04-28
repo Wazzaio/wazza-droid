@@ -1,9 +1,7 @@
 package com.wazza.android.sdk.service;
 
-import android.app.DownloadManager;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -11,7 +9,6 @@ import com.wazza.android.sdk.Wazza;
 import com.wazza.android.sdk.domain.Session;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,17 +21,17 @@ public class SessionService {
     private static final String ENDPOINT_SESSION_NEW = "session/new";
     private static final String ENDPOINT_SESSION_END = "session/end";
 
-    private Session currentSession;
+    private static Session currentSession;
 
-    public static long getSessionLenght(Date originalTime){
+    public static long getSessionLenght(Date originalTime) {
         return Calendar.getInstance().getTime().getTime() - originalTime.getTime();
     }
 
-    private String constructURL(String URL){
+    private static String constructURL(String URL) {
         return URL + "/" + Wazza.companyName + "/" + Wazza.appName;
     }
 
-    public void initSession(){
+    public static void initSession() {
         currentSession = new Session(Wazza.appName, Wazza.companyName);//wazza.
 
         RequestParams requestParams = Util.constructRequestHeader();
@@ -58,14 +55,14 @@ public class SessionService {
     }
 
     //TODO:
-    public void resumeSession(){
+    public static void resumeSession() {
         //currentSession = persist.getCurrentSession();
         //currentSession.date = new Date();
     }
 
-    public void closeSession(){
+    public static void closeSession() {
 
-        if(currentSession == null)
+        if (currentSession == null)
             return; //silent fail
 
         JsonObject json = new JsonObject();
@@ -92,7 +89,4 @@ public class SessionService {
         });
     }
 
-    public SessionService(){
-
-    }
 }

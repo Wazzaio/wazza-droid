@@ -4,15 +4,15 @@ import com.google.gson.Gson;
 
 public class Application {
 
-	private String applicationName;
+    private String applicationName;
 
-	public String getApplicationName() {
-		return applicationName;
-	}
+    public String getApplicationName() {
+        return applicationName;
+    }
 
-	public void setApplicationName(String applicationName) {
-		this.applicationName = applicationName;
-	}
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
 
     public String serialize() {
         // Serialize this class into a JSON string using GSON

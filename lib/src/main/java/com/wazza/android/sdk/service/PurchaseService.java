@@ -11,7 +11,7 @@ public class PurchaseService {
 
     private static final String ENDPOINT_PURCHASE = "purchase";
 
-    public void makePurchase(Item item){
+    public void makePurchase(Item item) {
 
         Purchase purchase = new Purchase();
         purchase.setFromItem(item);

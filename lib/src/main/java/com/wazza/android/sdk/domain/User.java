@@ -4,15 +4,15 @@ import com.google.gson.Gson;
 
 public class User {
 
-	private String username;
+    private String username;
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String serialize() {
         // Serialize this class into a JSON string using GSON

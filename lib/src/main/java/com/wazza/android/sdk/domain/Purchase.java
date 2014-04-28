@@ -5,12 +5,11 @@ import android.location.Location;
 import com.google.gson.Gson;
 import com.wazza.android.sdk.Wazza;
 import com.wazza.android.sdk.service.SecurityService;
-import com.wazza.android.sdk.service.Util;
 
 import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Purchase {
 
@@ -79,14 +78,13 @@ public class Purchase {
         this.deviceInfo = deviceInfo;
     }
 
-    private JSONObject locationToJson(){
+    private JSONObject locationToJson() {
         JSONObject locationJson = new JSONObject();
         try {
             //TODO: add relevant fields.
             locationJson.put("latitude", location.getLatitude());
             locationJson.put("longitude", location.getLongitude());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             //tba
         }
         return locationJson;
@@ -104,8 +102,7 @@ public class Purchase {
             purchase.put("time", time);
             purchase.put("location", locationToJson());
             purchase.put("device", deviceInfo.deviceToJson());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             //tba
         }
         return purchase;
@@ -115,7 +112,7 @@ public class Purchase {
         setItemId(item.getId());
         setAppName(Wazza.appName);
         setPrice(item.getCurrency().getValue());
-        setUserId(Wazza.username);
+        //setUserId(Wazza.username);
         //setDeviceInfo();
         //setLocation();
 

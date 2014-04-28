@@ -23,7 +23,7 @@ public class Session {
         return gson.fromJson(serializedData, Session.class);
     }
 
-    public Session(String app, String company){
+    public Session(String app, String company) {
         this.appName = app;
         this.companyName = company;
         this.sessionStart = Calendar.getInstance().getTime();

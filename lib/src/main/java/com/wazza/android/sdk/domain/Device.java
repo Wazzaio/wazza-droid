@@ -8,94 +8,94 @@ import java.util.UUID;
 
 public class Device {
 
-	private String manufacturer;
-	private String model;
-	
-	private String buildCodename;
-	private String buildIncremental;
-	private String buildRelease;
-		
-	private String tmDevice;
-	private String simSerial;
-	
-	private String androidID;
-	private UUID deviceUUID;
-	
-	
-	public String getManufacturer() {
-		return manufacturer;
-	}
+    private String manufacturer;
+    private String model;
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+    private String buildCodename;
+    private String buildIncremental;
+    private String buildRelease;
 
-	public String getModel() {
-		return model;
-	}
+    private String tmDevice;
+    private String simSerial;
 
-	public void setModel(String model) {
-		this.model = model;
-	}
+    private String androidID;
+    private UUID deviceUUID;
 
-	public String getBuildCodename() {
-		return buildCodename;
-	}
 
-	public void setBuildCodename(String buildCodename) {
-		this.buildCodename = buildCodename;
-	}
+    public String getManufacturer() {
+        return manufacturer;
+    }
 
-	public String getBuildIncremental() {
-		return buildIncremental;
-	}
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
 
-	public void setBuildIncremental(String buildIncremental) {
-		this.buildIncremental = buildIncremental;
-	}
+    public String getModel() {
+        return model;
+    }
 
-	public String getBuildRelease() {
-		return buildRelease;
-	}
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-	public void setBuildRelease(String buildRelease) {
-		this.buildRelease = buildRelease;
-	}
+    public String getBuildCodename() {
+        return buildCodename;
+    }
 
-	public String getTmDevice() {
-		return tmDevice;
-	}
+    public void setBuildCodename(String buildCodename) {
+        this.buildCodename = buildCodename;
+    }
 
-	public void setTmDevice(String tmDevice) {
-		this.tmDevice = tmDevice;
-	}
+    public String getBuildIncremental() {
+        return buildIncremental;
+    }
 
-	public String getSimSerial() {
-		return simSerial;
-	}
+    public void setBuildIncremental(String buildIncremental) {
+        this.buildIncremental = buildIncremental;
+    }
 
-	public void setSimSerial(String tmSerial) {
-		this.simSerial = tmSerial;
-	}
+    public String getBuildRelease() {
+        return buildRelease;
+    }
 
-	public String getAndroidID() {
-		return androidID;
-	}
+    public void setBuildRelease(String buildRelease) {
+        this.buildRelease = buildRelease;
+    }
 
-	public void setAndroidID(String androidID) {
-		this.androidID = androidID;
-	}
+    public String getTmDevice() {
+        return tmDevice;
+    }
 
-	public UUID getDeviceUUID() {
-		return deviceUUID;
-	}
+    public void setTmDevice(String tmDevice) {
+        this.tmDevice = tmDevice;
+    }
 
-	public void setDeviceUUID(UUID deviceUUID) {
-		this.deviceUUID = deviceUUID;
-	}
+    public String getSimSerial() {
+        return simSerial;
+    }
+
+    public void setSimSerial(String tmSerial) {
+        this.simSerial = tmSerial;
+    }
+
+    public String getAndroidID() {
+        return androidID;
+    }
+
+    public void setAndroidID(String androidID) {
+        this.androidID = androidID;
+    }
+
+    public UUID getDeviceUUID() {
+        return deviceUUID;
+    }
+
+    public void setDeviceUUID(UUID deviceUUID) {
+        this.deviceUUID = deviceUUID;
+    }
 
     //deprecated
-    public JSONObject deviceToJson(){
+    public JSONObject deviceToJson() {
         JSONObject deviceJson = new JSONObject();
         try {
             //TODO: add relevant fields.
@@ -103,8 +103,7 @@ public class Device {
             deviceJson.put("osVersion", getBuildRelease());
             deviceJson.put("deviceModel", getManufacturer() + getModel());
             deviceJson.put("osType", "android");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             //tba
         }
         return deviceJson;

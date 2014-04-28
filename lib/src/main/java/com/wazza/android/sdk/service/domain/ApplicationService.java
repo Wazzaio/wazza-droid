@@ -5,8 +5,8 @@ import android.content.Context;
 import com.wazza.android.sdk.domain.Application;
 
 public class ApplicationService {
-	
-	private Context context;
+
+    private Context context;
 
     private Application application;
 
@@ -25,19 +25,19 @@ public class ApplicationService {
         }
         final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
         */
-	    int stringId = context.getApplicationInfo().labelRes;
-	    application.setApplicationName(context.getString(stringId));
-	}
+        int stringId = context.getApplicationInfo().labelRes;
+        application.setApplicationName(context.getString(stringId));
+    }
 
-	public String getApplicationName() {
-	    return application.getApplicationName();
-	}
+    public String getApplicationName() {
+        return application.getApplicationName();
+    }
 
-	public ApplicationService(Context context) {
-		this.context = context;
-		application = new Application();
-		setApplicationName();
-	}
+    public ApplicationService(Context context) {
+        this.context = context;
+        application = new Application();
+        setApplicationName();
+    }
 
     public ApplicationService(Context context, Application application) {
         this.context = context;

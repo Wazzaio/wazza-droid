@@ -1,7 +1,6 @@
 package com.wazza.android.sdk.service;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.wazza.android.sdk.Wazza;
 import com.wazza.android.sdk.domain.Item;
 
@@ -23,11 +22,11 @@ public class ItemService {
 
     private List<Item> itemList = new ArrayList<Item>();
 
-    public void addItem(JSONObject item){
+    public void addItem(JSONObject item) {
         itemList.add(Item.create(item.toString()));
     }
 
-    public void fetchItems(){
+    public void fetchItems() {
         RestClient.get(ENDPOINT_ITEM_DETAILED_LIST + Wazza.appName, Util.constructRequestHeader(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray results) {
@@ -53,7 +52,7 @@ public class ItemService {
         });
     }
 
-    public ItemService(PersistenceService persist){
+    public ItemService(PersistenceService persist) {
         this.persist = persist;
     }
 }

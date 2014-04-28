@@ -9,50 +9,49 @@ import com.wazza.android.sdk.service.PurchaseService;
 import com.wazza.android.sdk.service.SessionService;
 import com.wazza.android.sdk.service.Util;
 
-public class Wazza{
-	
-	private static Wazza self;
+public class Wazza {
+
+    private static Wazza self;
 
     private final String secret;
     private final PersistenceService persist;
     private final PurchaseService purchase;
     private final ItemService item;
-    private final SessionService sessionService;
 
     public static String appName;
     public static String companyName;
     //private static String username;
 
-    public void sessionOpen(){
-        sessionService.initSession(); //or resume if it's still inside of the timeframe
+    public void sessionOpen() {
+        SessionService.initSession(); //or resume if it's still inside of the timeframe
         flush();
 
         item.fetchItems();
     }
 
-    public void sessionClose(){
+    public void sessionClose() {
         flush();
-        sessionService.closeSession();
+        SessionService.closeSession();
     }
 
-    public void flush(){
+    public void flush() {
 
     }
 
     //track special event/attribute. tbd.
-    public void track(){
+    public void track() {
 
     }
 
-	//initializer and constructor
-	public static Wazza init(Context context, String secret, String appName, String companyName){
-		//poor's man singleton
-		if(self == null)
-			self = new Wazza(context, secret, appName, companyName);
-    	return self;
-	}
-	
-	private Wazza(Context context, String secret, String appName, String companyName){
+    //initializer and constructor
+    public static Wazza init(Context context, String secret, String appName, String companyName) {
+        //poor's man singleton
+        if (self == null)
+            self = new Wazza(context, secret, appName, companyName);
+        return self;
+    }
+
+    private Wazza(Context context, String secret, String appName, String companyName) {
         Log.v("WazzaSDK", Util.getCurrentTime());
 
         this.secret = secret;
@@ -60,8 +59,7 @@ public class Wazza{
         this.companyName = companyName;
         this.persist = new PersistenceService(context);
         this.item = new ItemService(persist);
-        this.sessionService = new SessionService();
         this.purchase = new PurchaseService();
-	}
+    }
 
 }

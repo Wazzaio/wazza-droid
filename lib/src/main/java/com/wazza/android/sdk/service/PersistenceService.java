@@ -6,19 +6,14 @@ import android.location.Location;
 
 import com.google.gson.Gson;
 import com.wazza.android.sdk.domain.Application;
-import com.wazza.android.sdk.domain.Communication;
 import com.wazza.android.sdk.domain.Device;
 import com.wazza.android.sdk.domain.Item;
 import com.wazza.android.sdk.domain.User;
 import com.wazza.android.sdk.service.domain.ApplicationService;
-import com.wazza.android.sdk.service.domain.CommunicationService;
 import com.wazza.android.sdk.service.domain.DeviceService;
 import com.wazza.android.sdk.service.domain.LocationService;
 import com.wazza.android.sdk.service.domain.UserService;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersistenceService {
@@ -47,7 +42,7 @@ public class PersistenceService {
 
     SharedPreferences preferencesReader = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
-    public void storeItem(List<Item> itemList){
+    public void storeItem(List<Item> itemList) {
         SharedPreferences.Editor editor = preferencesReader.edit();
         Gson gson = new Gson();
         editor.putString(ITEMS_KEY, gson.toJson(itemList));
@@ -55,14 +50,13 @@ public class PersistenceService {
     }
 
 
-
-/*
- * Initialization methods
- */
-    private void init(){
+    /*
+     * Initialization methods
+     */
+    private void init() {
 
         // Read the shared preference value and verify if it's the first time the app gets used.
-        if(preferencesReader.contains(APP_KEY)){
+        if (preferencesReader.contains(APP_KEY)) {
             //restore everything
 
             // Create a new object from the serialized data with the same state
@@ -72,8 +66,7 @@ public class PersistenceService {
             user = User.create(preferencesReader.getString(USER_KEY, null));
             //TODO: location: change to Location API from google (instead of own service). use LOCATION_KEY
 
-        }
-        else {
+        } else {
             //create everything
             appService = new ApplicationService(context);
             deviceService = new DeviceService(context);
@@ -92,7 +85,7 @@ public class PersistenceService {
 
     }
 
-    public PersistenceService(Context context){
+    public PersistenceService(Context context) {
         this.context = context;
         init();
     }
