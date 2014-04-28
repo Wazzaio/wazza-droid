@@ -94,6 +94,7 @@ public class Device {
 		this.deviceUUID = deviceUUID;
 	}
 
+    //deprecated
     public JSONObject deviceToJson(){
         JSONObject deviceJson = new JSONObject();
         try {

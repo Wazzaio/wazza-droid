@@ -3,6 +3,7 @@ package com.wazza.android.sdk.domain;
 import android.location.Location;
 
 import com.google.gson.Gson;
+import com.wazza.android.sdk.Wazza;
 import com.wazza.android.sdk.service.SecurityService;
 import com.wazza.android.sdk.service.Util;
 
@@ -112,9 +113,9 @@ public class Purchase {
 
     public void setFromItem(Item item) {
         setItemId(item.getId());
-        setAppName(Util.appName);
+        setAppName(Wazza.appName);
         setPrice(item.getCurrency().getValue());
-        setUserId(Util.username);
+        setUserId(Wazza.username);
         //setDeviceInfo();
         //setLocation();
 

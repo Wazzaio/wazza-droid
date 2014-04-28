@@ -6,7 +6,7 @@ import android.util.Log;
 import com.wazza.android.sdk.service.ItemService;
 import com.wazza.android.sdk.service.PersistenceService;
 import com.wazza.android.sdk.service.PurchaseService;
-import com.wazza.android.sdk.service.Session;
+import com.wazza.android.sdk.service.SessionService;
 import com.wazza.android.sdk.service.Util;
 
 public class Wazza{
@@ -17,14 +17,14 @@ public class Wazza{
     private final PersistenceService persist;
     private final PurchaseService purchase;
     private final ItemService item;
-    private final Session session;
+    private final SessionService sessionService;
 
     public static String appName;
     public static String companyName;
     //private static String username;
 
     public void sessionOpen(){
-        session.initSession(); //or resume if it's still inside of the timeframe
+        sessionService.initSession(); //or resume if it's still inside of the timeframe
         flush();
 
         item.fetchItems();
@@ -32,7 +32,7 @@ public class Wazza{
 
     public void sessionClose(){
         flush();
-        session.closeSession();
+        sessionService.closeSession();
     }
 
     public void flush(){
@@ -60,7 +60,7 @@ public class Wazza{
         this.companyName = companyName;
         this.persist = new PersistenceService(context);
         this.item = new ItemService(persist);
-        this.session = new Session();
+        this.sessionService = new SessionService();
         this.purchase = new PurchaseService();
 	}
 
