@@ -34,7 +34,7 @@ public class SessionService {
     public static void initSession() {
         currentSession = new Session(Wazza.appName, Wazza.companyName);//wazza.
 
-        RequestParams requestParams = Util.constructRequestHeader();
+        RequestParams requestParams = RestClient.constructRequestHeader();
         requestParams.put("content", currentSession.serialize());
 
         RestClient.post(constructURL(ENDPOINT_SESSION_NEW), requestParams, new JsonHttpResponseHandler() {
@@ -49,7 +49,7 @@ public class SessionService {
                                   org.apache.http.Header[] headers,
                                   java.lang.Throwable e,
                                   org.json.JSONObject errorResponse) {
-                System.err.println("oops.. something went wrong");
+                Log.e("WazzaSDK", "oops.. something went wrong");
             }
         });
     }
@@ -69,7 +69,7 @@ public class SessionService {
         json.addProperty("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z").format(Calendar.getInstance().getTime()));
         json.addProperty("hash", currentSession.hashCode());
 
-        RequestParams requestParams = Util.constructRequestHeader();
+        RequestParams requestParams = RestClient.constructRequestHeader();
         requestParams.put("content", json);
 
         RestClient.post(constructURL(ENDPOINT_SESSION_END), requestParams, new JsonHttpResponseHandler() {
@@ -84,7 +84,7 @@ public class SessionService {
                                   org.apache.http.Header[] headers,
                                   java.lang.Throwable e,
                                   org.json.JSONObject errorResponse) {
-                System.err.println("oops.. something went wrong");
+                Log.e("WazzaSDK", "oops.. something went wrong");
             }
         });
     }

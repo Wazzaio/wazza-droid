@@ -20,7 +20,7 @@ public class Wazza {
 
     public static String appName;
     public static String companyName;
-    //private static String username;
+    public static String username;
 
     public void sessionOpen() {
         SessionService.initSession(); //or resume if it's still inside of the timeframe

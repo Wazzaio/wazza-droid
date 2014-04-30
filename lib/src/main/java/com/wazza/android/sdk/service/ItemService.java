@@ -1,14 +1,11 @@
 package com.wazza.android.sdk.service;
 
+import android.util.Log;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.wazza.android.sdk.Wazza;
-import com.wazza.android.sdk.domain.Item;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ItemService {
 
@@ -18,28 +15,19 @@ public class ItemService {
     private static final String ENDPOINT_ITEM_LIST = "items/";
     private static final String ENDPOINT_ITEM_DETAILED_LIST = "items/details/";
     private static final String ENDPOINT_DETAILS = "item/";
+    private static final String ENDPOINT_RECOMMENDATION = "rec/user/items/";
 
 
-    private List<Item> itemList = new ArrayList<Item>();
-
-    public void addItem(JSONObject item) {
-        itemList.add(Item.create(item.toString()));
+    private String constructURL(String URL) {
+        return URL + Wazza.companyName + "/" + Wazza.appName;
     }
 
-    public void fetchItems() {
-        RestClient.get(ENDPOINT_ITEM_DETAILED_LIST + Wazza.appName, Util.constructRequestHeader(), new JsonHttpResponseHandler() {
+    public void getRecommendedItems(int limit) {
+        String url = constructURL(ENDPOINT_RECOMMENDATION) + "/" + Wazza.username + "/" + limit;
+        RestClient.get(url, RestClient.constructRequestHeader(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray results) {
-                try {
-                    for (int i = 0; i < results.length(); i++) {
-                        JSONObject object = results.getJSONObject(i);
-                        addItem(object);
-                    }
-                    persist.storeItem(itemList);
-                } catch (Exception e) {
-                    //tba
-                    e.printStackTrace();
-                }
+                persist.storeRecommendedItems(results);
             }
 
             @Override
@@ -47,7 +35,26 @@ public class ItemService {
                                   org.apache.http.Header[] headers,
                                   java.lang.Throwable e,
                                   org.json.JSONObject errorResponse) {
-                System.err.println("oops.. something went wrong");
+                Log.e("WazzaSDK", "oops.. something went wrong");
+            }
+        });
+
+    }
+
+    public void fetchItems() {
+        RestClient.get(constructURL(ENDPOINT_ITEM_DETAILED_LIST), RestClient.constructRequestHeader(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(JSONArray results) {
+                persist.addItem(results);
+                persist.commitItems();
+            }
+
+            @Override
+            public void onFailure(int statusCode,
+                                  org.apache.http.Header[] headers,
+                                  java.lang.Throwable e,
+                                  org.json.JSONObject errorResponse) {
+                Log.e("WazzaSDK", "oops.. something went wrong");
             }
         });
     }

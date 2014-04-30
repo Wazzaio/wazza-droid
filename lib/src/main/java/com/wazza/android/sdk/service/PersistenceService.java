@@ -14,7 +14,10 @@ import com.wazza.android.sdk.service.domain.DeviceService;
 import com.wazza.android.sdk.service.domain.LocationService;
 import com.wazza.android.sdk.service.domain.UserService;
 
-import java.util.List;
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class PersistenceService {
 
@@ -30,25 +33,53 @@ public class PersistenceService {
     private DeviceService deviceService;
     private UserService userService;
     private LocationService locationService;
-    //private CommunicationService commService;
 
     String PREFS_NAME = "WazzaSDK";
     String APP_KEY = "application";
     String DEVICE_KEY = "device";
     String USER_KEY = "user";
     String LOCATION_KEY = "location";
-    //String COMM_KEY = "communication";
     String ITEMS_KEY = "items";
 
     SharedPreferences preferencesReader = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
-    public void storeItem(List<Item> itemList) {
-        SharedPreferences.Editor editor = preferencesReader.edit();
-        Gson gson = new Gson();
-        editor.putString(ITEMS_KEY, gson.toJson(itemList));
-        editor.commit();
+    /*
+     * Item related
+     */
+    private Hashtable<String, Item> itemHashtable = new Hashtable<>();
+    private ArrayList<String> recommendedItemList;
+
+    public void storeRecommendedItems(JSONArray itemArray) {
+        try {
+            for (int i = 0; i < itemArray.length(); i++) {
+                //TODO: strip json bling
+                recommendedItemList.add(itemArray.getJSONObject(i).toString());
+            }
+        } catch (Exception e) {
+            //tba
+            e.printStackTrace();
+        }
     }
 
+    public void addItem(JSONArray itemArray) {
+        try {
+            for (int i = 0; i < itemArray.length(); i++) {
+                Item item = Item.create(itemArray.getJSONObject(i).toString());
+                itemHashtable.put(item.getId(), item);
+            }
+        } catch (Exception e) {
+            //tba
+            e.printStackTrace();
+        }
+
+    }
+
+    public void commitItems() {
+        SharedPreferences.Editor editor = preferencesReader.edit();
+        Gson gson = new Gson();
+        editor.putString(ITEMS_KEY, gson.toJson(itemHashtable));
+        editor.commit();
+    }
 
     /*
      * Initialization methods
@@ -78,7 +109,6 @@ public class PersistenceService {
             editor.putString(APP_KEY, appService.getApplication().serialize());
             editor.putString(DEVICE_KEY, deviceService.getDevice().serialize());
             editor.putString(USER_KEY, userService.getUser().serialize());
-            //editor.putString(COMM_KEY, commService.getCommunication().serialize());
             editor.commit();
 
         }

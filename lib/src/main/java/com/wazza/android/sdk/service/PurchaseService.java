@@ -16,7 +16,7 @@ public class PurchaseService {
         Purchase purchase = new Purchase();
         purchase.setFromItem(item);
 
-        RequestParams params = Util.constructRequestHeader();
+        RequestParams params = RestClient.constructRequestHeader();
         params.put("payload", purchase);
 
         RestClient.post(ENDPOINT_PURCHASE, params, new JsonHttpResponseHandler() {

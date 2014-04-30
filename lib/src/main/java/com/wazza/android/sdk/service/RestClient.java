@@ -3,6 +3,7 @@ package com.wazza.android.sdk.service;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.wazza.android.sdk.Wazza;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -18,6 +19,16 @@ public class RestClient {
     public static AsyncHttpClient getClient() {
         return client;
     }
+
+
+    protected static RequestParams constructRequestHeader() {
+        RequestParams params = new RequestParams();
+        params.put("AppName", Wazza.appName);
+        //todo: add security headers
+
+        return params;
+    }
+
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);

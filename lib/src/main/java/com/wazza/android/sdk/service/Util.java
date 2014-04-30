@@ -2,19 +2,7 @@ package com.wazza.android.sdk.service;
 
 import android.text.format.Time;
 
-import com.loopj.android.http.RequestParams;
-import com.wazza.android.sdk.Wazza;
-
 public class Util {
-
-
-    protected static RequestParams constructRequestHeader() {
-        RequestParams params = new RequestParams();
-        params.put("AppName", Wazza.appName);
-        //todo: add security headers
-
-        return params;
-    }
 
     public static String getCurrentTime() {
         Time now = new Time();

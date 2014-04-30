@@ -7,7 +7,11 @@ import java.util.Date;
 
 public class Session {
 
+    //TODO: populate
     private final Date sessionStart;
+    private String userID;
+    private String location;
+    private String device;
     public String appName;
     public String companyName;
 
