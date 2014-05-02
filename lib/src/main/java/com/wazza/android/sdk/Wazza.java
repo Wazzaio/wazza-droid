@@ -23,7 +23,7 @@ public class Wazza {
     public static String username;
 
     public void sessionOpen() {
-        SessionService.initSession(); //or resume if it's still inside of the timeframe
+        SessionService.initSession(persist); //or resume if it's still inside of the timeframe
         flush();
 
         item.fetchItems();
@@ -52,12 +52,13 @@ public class Wazza {
     }
 
     private Wazza(Context context, String secret, String appName, String companyName) {
-        Log.v("WazzaSDK", Util.getCurrentTime());
+        Log.v("WazzaSDK", "Started at: " + Util.getCurrentTime());
 
         this.secret = secret;
         this.appName = appName; //app.getApplicationName();
         this.companyName = companyName;
         this.persist = new PersistenceService(context);
+        this.username = persist.getUser();
         this.item = new ItemService(persist);
         this.purchase = new PurchaseService();
     }

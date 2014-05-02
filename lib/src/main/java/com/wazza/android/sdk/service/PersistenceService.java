@@ -27,12 +27,6 @@ public class PersistenceService {
     private Device device;
     private User user;
     private Location location;
-    //private Communication comm;
-
-    private ApplicationService appService;
-    private DeviceService deviceService;
-    private UserService userService;
-    private LocationService locationService;
 
     String PREFS_NAME = "WazzaSDK";
     String APP_KEY = "application";
@@ -42,6 +36,17 @@ public class PersistenceService {
     String ITEMS_KEY = "items";
 
     SharedPreferences preferencesReader = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+
+
+
+    /*
+     * User related
+     */
+
+    public String getUser(){
+        return user.getUsername();
+    }
 
     /*
      * Item related
@@ -95,20 +100,25 @@ public class PersistenceService {
             app = Application.create(preferencesReader.getString(APP_KEY, null));
             device = Device.create(preferencesReader.getString(DEVICE_KEY, null));
             user = User.create(preferencesReader.getString(USER_KEY, null));
-            //TODO: location: change to Location API from google (instead of own service). use LOCATION_KEY
+            //TODO: location: change to Location API from google (instead of own service). use LOCATION_KEY [1]
+            //TODO: create services for each of new (saved) objects if necessary
 
         } else {
             //create everything
-            appService = new ApplicationService(context);
-            deviceService = new DeviceService(context);
-            userService = new UserService(context);
-            locationService = new LocationService(context);
+            ApplicationService appService = new ApplicationService(context);
+            DeviceService deviceService = new DeviceService(context);
+            UserService userService = new UserService(context);
+            LocationService locationService = new LocationService(context); // [1]
+
+            app = appService.getApplication();
+            device = deviceService.getDevice();
+            user = userService.getUser();
 
             // Serialize the object and import it into SharedPreferences
             SharedPreferences.Editor editor = preferencesReader.edit();
-            editor.putString(APP_KEY, appService.getApplication().serialize());
-            editor.putString(DEVICE_KEY, deviceService.getDevice().serialize());
-            editor.putString(USER_KEY, userService.getUser().serialize());
+            editor.putString(APP_KEY, app.serialize());
+            editor.putString(DEVICE_KEY, device.serialize());
+            editor.putString(USER_KEY, user.serialize());
             editor.commit();
 
         }

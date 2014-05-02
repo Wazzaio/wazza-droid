@@ -17,3 +17,6 @@ Permissions:
 * android.permission.GET_ACCOUNTS
 * android.permission.READ_PHONE_STATE
     
+----
+Caution:
+ * On device querying, the "osName" property will read instead a UUID of said phone. There's no point in retrieving, it's an Android OS.

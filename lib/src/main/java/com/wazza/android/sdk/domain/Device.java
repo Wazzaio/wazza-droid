@@ -98,7 +98,6 @@ public class Device {
     public JSONObject deviceToJson() {
         JSONObject deviceJson = new JSONObject();
         try {
-            //TODO: add relevant fields.
             deviceJson.put("osName", getAndroidID());
             deviceJson.put("osVersion", getBuildRelease());
             deviceJson.put("deviceModel", getManufacturer() + getModel());

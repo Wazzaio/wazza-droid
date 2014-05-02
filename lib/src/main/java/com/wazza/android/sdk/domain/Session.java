@@ -7,13 +7,56 @@ import java.util.Date;
 
 public class Session {
 
-    //TODO: populate
     private final Date sessionStart;
     private String userID;
     private String location;
     private String device;
-    public String appName;
-    public String companyName;
+    private String appName;
+    private String companyName;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Date getSessionStart() {
+        return sessionStart;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
     public String serialize() {
         // Serialize this class into a JSON string using GSON
@@ -27,7 +70,10 @@ public class Session {
         return gson.fromJson(serializedData, Session.class);
     }
 
-    public Session(String app, String company) {
+    public Session(String userID, String location, String device, String app, String company) {
+        this.userID = userID;
+        this.location = location;
+        this.device = device;
         this.appName = app;
         this.companyName = company;
         this.sessionStart = Calendar.getInstance().getTime();
