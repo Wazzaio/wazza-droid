@@ -37,9 +37,6 @@ public class PersistenceService {
 
     SharedPreferences preferencesReader = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
-
-
-
     /*
      * User related
      */

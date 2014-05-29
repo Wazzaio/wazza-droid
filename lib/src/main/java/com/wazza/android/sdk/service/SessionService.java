@@ -32,7 +32,7 @@ public class SessionService {
     }
 
     public static void initSession(PersistenceService persist) {//add location and device
-        currentSession = new Session(Wazza.username, persist.getUser() , Wazza.appName, Wazza.companyName);//wazza.
+        currentSession = new Session(Wazza.username, "TODO: location", "TODO: device", Wazza.appName, Wazza.companyName);//wazza.
 
         RequestParams requestParams = RestClient.constructRequestHeader();
         requestParams.put("content", currentSession.serialize());
