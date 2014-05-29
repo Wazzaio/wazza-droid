@@ -22,13 +22,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import io.wazza.testbed.util.IabHelper;
 import io.wazza.testbed.util.IabResult;
 import io.wazza.testbed.util.Inventory;
 import io.wazza.testbed.util.Purchase;
 
+import com.wazza.android.sdk.Wazza;
 
 /**
  * Example game using in-app billing version 3.
@@ -85,7 +88,7 @@ import io.wazza.testbed.util.Purchase;
  */
 public class MainActivity extends Activity {
     // Debug tag, for logging
-    static final String TAG = "TrivialDrive";
+    static final String TAG = "Wazza Testbed";
 
     // Does the user have the premium upgrade?
     boolean mIsPremium = false;
@@ -116,6 +119,28 @@ public class MainActivity extends Activity {
     // The helper object
     IabHelper mHelper;
 
+    ImageButton imageButton;
+
+    //Wazza wazza = Wazza.init(this, "secret token", "testbed", "wazza");
+
+    public void addListenerOnButton() {
+
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Toast.makeText(MainActivity.this,
+                        "Wazza!", Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +149,8 @@ public class MainActivity extends Activity {
         // load game data
         loadData();
 
+        //wazza.sessionOpen();
+        addListenerOnButton();
         /* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
          * (that you got from the Google Play developer console). This is not your
          * developer public key, it's the *app-specific* public key.
@@ -174,6 +201,8 @@ public class MainActivity extends Activity {
                 mHelper.queryInventoryAsync(mGotInventoryListener);
             }
         });
+
+        //wazza.sessionClose();
     }
 
     // Listener that's called when we finish querying the items and subscriptions we own
@@ -224,6 +253,7 @@ public class MainActivity extends Activity {
             Log.d(TAG, "Initial inventory query finished; enabling main UI.");
         }
     };
+public void log(String coco){}
 
     // User clicked the "Buy Gas" button
     public void onBuyGasButtonClicked(View arg0) {
@@ -235,7 +265,8 @@ public class MainActivity extends Activity {
         }
 
         if (mTank >= TANK_MAX) {
-            complain("Your tank is full. Drive around a bit!");
+           // wazza.purchase("gas");
+            log("Your tank is full. Drive around a bit!");
             return;
         }
 
