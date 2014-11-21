@@ -36,6 +36,8 @@ public class Wazza {
 
     }
 
+    public void purchase(String g){}
+
     //track special event/attribute. tbd.
     public static void track() {
 
