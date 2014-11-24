@@ -9,9 +9,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class RestClient {
-    //private static final String BASE_URL = "http://api.usewazza.com/";
+    //private static final String BASE_URL = "http://www.wazza.com/api";
 
-    private static final String BASE_URL = "http://localhost:9000/api/";
+
+    public static String key;
+
+    private static final String BASE_URL = "http://192.168.1.74:9000/api/";
 
     //should we also support sync calls?
     private static AsyncHttpClient client = new AsyncHttpClient();
@@ -23,7 +26,7 @@ public class RestClient {
 
     protected static RequestParams constructRequestHeader() {
         RequestParams params = new RequestParams();
-        //params.put("AppName", Wazza.appName);
+        params.put("SDK-TOKEN", key);
         //todo: add security headers
 
         return params;

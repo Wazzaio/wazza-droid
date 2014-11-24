@@ -38,6 +38,10 @@ public class GPSTracker extends Service implements LocationListener {
         getLocation();
     }
 
+    public String getLocationString(){
+        return latitude + ", " + longitude;
+    }
+
     Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);

@@ -2,28 +2,29 @@ package io.wazza.android.sdk.domain;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Session {
 
     private final Date sessionStart;
+    private Date sessionEnd;
     private String userID;
-    private String location;
+    private Location location;
     private String device;
-    private String appName;
-    private String companyName;
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+    private ArrayList<Purchase> purchases = new ArrayList<>();
 
     public Date getSessionStart() {
         return sessionStart;
+    }
+
+    public Date getSessionEnd() {
+        return sessionEnd;
+    }
+
+    public void setSessionEnd(Date sessionEnd) {
+        this.sessionEnd = sessionEnd;
     }
 
     public String getUserID() {
@@ -34,11 +35,11 @@ public class Session {
         this.userID = userID;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -50,13 +51,14 @@ public class Session {
         this.device = device;
     }
 
-    public String getAppName() {
-        return appName;
+    public ArrayList<Purchase> getPurchases() {
+        return purchases;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setPurchases(ArrayList<Purchase> purchases) {
+        this.purchases = purchases;
     }
+
 
     public String serialize() {
         // Serialize this class into a JSON string using GSON
@@ -70,9 +72,10 @@ public class Session {
         return gson.fromJson(serializedData, Session.class);
     }
 
-    public Session(String userID, String location) {
+    public Session(String userID, Location location, String device) {
         this.userID = userID;
         this.location = location;
         this.sessionStart = Calendar.getInstance().getTime();
+        this.device = device;
     }
 }

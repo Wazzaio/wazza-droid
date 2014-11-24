@@ -23,7 +23,7 @@ public class ItemService {
     }
 
     public void getRecommendedItems(int limit) {
-        String url = constructURL(ENDPOINT_RECOMMENDATION) + "/" + Wazza.username + "/" + limit;
+        String url = constructURL(ENDPOINT_RECOMMENDATION) + "/" + limit;
         RestClient.get(url, RestClient.constructRequestHeader(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray results) {

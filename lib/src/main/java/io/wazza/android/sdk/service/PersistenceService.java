@@ -24,18 +24,23 @@ public class PersistenceService {
     private static Context context;
 
     private Application app;
+
     private Device device;
     private User user;
     private Location location;
 
-    String PREFS_NAME = "WazzaSDK";
-    String APP_KEY = "application";
-    String DEVICE_KEY = "device";
-    String USER_KEY = "user";
-    String LOCATION_KEY = "location";
-    String ITEMS_KEY = "items";
+    private String PREFS_NAME = "WazzaSDK";
+    private String APP_KEY = "application";
+    private String DEVICE_KEY = "device";
+    private String USER_KEY = "user";
+    private String LOCATION_KEY = "location";
+    private String ITEMS_KEY = "items";
 
-    SharedPreferences preferencesReader = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    SharedPreferences preferencesReader;
+
+    public Device getDevice() {
+        return device;
+    }
 
     /*
      * User related
@@ -124,6 +129,7 @@ public class PersistenceService {
 
     public PersistenceService(Context context) {
         this.context = context;
+        preferencesReader = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         init();
     }
 
