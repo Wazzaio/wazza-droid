@@ -5,7 +5,9 @@ import android.util.Log;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import io.wazza.android.sdk.Wazza;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class ItemService {
 
@@ -26,7 +28,7 @@ public class ItemService {
         String url = constructURL(ENDPOINT_RECOMMENDATION) + "/" + limit;
         RestClient.get(url, RestClient.constructRequestHeader(), new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(JSONArray results) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray results) {
                 persist.storeRecommendedItems(results);
             }
 
@@ -44,7 +46,7 @@ public class ItemService {
     public void fetchItems() {
         RestClient.get(constructURL(ENDPOINT_ITEM_DETAILED_LIST), RestClient.constructRequestHeader(), new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(JSONArray results) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray results) {
                 persist.addItem(results);
                 persist.commitItems();
             }

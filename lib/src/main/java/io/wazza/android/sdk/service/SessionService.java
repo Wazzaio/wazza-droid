@@ -10,7 +10,9 @@ import io.wazza.android.sdk.Wazza;
 import io.wazza.android.sdk.domain.Location;
 import io.wazza.android.sdk.domain.Session;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -69,7 +71,7 @@ public class SessionService {
 
         RestClient.post(constructURL(ENDPOINT_SESSION_NEW), requestParams, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(JSONArray results) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //save in persist
                 Log.v("WazzaSDK", "New Session recorded.");
             }

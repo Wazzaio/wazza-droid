@@ -1,7 +1,8 @@
 package io.wazza.android.sdk.service;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import org.json.*;
+import com.loopj.android.http.*;
+import org.apache.http.Header;
 import io.wazza.android.sdk.domain.Item;
 import io.wazza.android.sdk.domain.Purchase;
 
@@ -21,8 +22,8 @@ public class PurchaseService {
 
         RestClient.post(ENDPOINT_PURCHASE, params, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(JSONArray jsonArray) {
-                //tba
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                // If the response is JSONObject instead of expected JSONArray
             }
         });
     }
