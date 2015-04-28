@@ -21,6 +21,7 @@ import java.util.Date;
 public class SessionService {
 
     //server endpoints
+    private static final String ENDPOINT_AUTH = "auth";
     private static final String ENDPOINT_SESSION_NEW = "session/new";
 
     private static Session currentSession;
@@ -36,7 +37,24 @@ public class SessionService {
     public static void initSession(Context context, PersistenceService persist) {//add location and device
         GPSTracker gps = new GPSTracker(context);
         Location location = new Location(gps.getLatitude(), gps.getLongitude());
-        currentSession = new Session(persist.getUser(), location, persist.getDevice().deviceToJson().toString());//wazza.
+        currentSession = new Session(persist.getUser(), location, persist.getDevice().deviceToJson().toString()); //wazza
+
+        RequestParams requestParams = RestClient.constructRequestHeader();
+
+        RestClient.post(constructURL(ENDPOINT_AUTH), requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Log.v("WazzaSDK", "Authentication successful.");
+            }
+
+            @Override
+            public void onFailure(int statusCode,
+                                  org.apache.http.Header[] headers,
+                                  java.lang.Throwable e,
+                                  org.json.JSONObject errorResponse) {
+                Log.e("WazzaSDK", "oops.. something went wrong");
+            }
+        });
     }
 
     public static void resumeSession(Context context, PersistenceService persist) {

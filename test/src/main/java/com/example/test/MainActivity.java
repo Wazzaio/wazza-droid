@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Wazza.init(this, "3d9c3ed4bcb950777a25f72a");
+        Wazza.init(this, "8f98fb0c29d532bccba556a5");
 
         final Button button = (Button) findViewById(R.id.close_btn);
         button.setOnClickListener(new View.OnClickListener() {

@@ -9,11 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class RestClient {
-    //private static final String BASE_URL = "http://www.wazza.com/api";
-
-
     public static String key;
 
+    //private static final String BASE_URL = "http://www.wazza.com/api";
     private static final String BASE_URL = "http://192.168.1.74:9000/api/";
 
     //should we also support sync calls?
@@ -31,7 +29,6 @@ public class RestClient {
 
         return params;
     }
-
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);

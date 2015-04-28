@@ -36,9 +36,9 @@ public class Wazza {
     * public methods of the SDK below
     * */
 
-    // request a on-the-fly flush of all the stored data
+    // request an on-the-fly flush of all the stored data
     public static void flush() {
-
+    //TODO
     }
 
     // handles a purchase of an IAP
