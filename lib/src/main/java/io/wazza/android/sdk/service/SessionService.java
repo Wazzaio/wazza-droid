@@ -45,6 +45,7 @@ public class SessionService {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("WazzaSDK", "Authentication successful.");
+                Log.v("WazzaSDK", response.toString());
             }
 
             @Override
