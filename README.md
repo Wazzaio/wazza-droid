@@ -20,3 +20,7 @@ Permissions:
 ----
 Caution:
  * On device querying, the "osName" property will read instead a UUID of said phone. There's no point in retrieving, it's an Android OS.
+
+
+## License
+All Wazza code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/Wazzaio/wazza-droid/graphs/contributors).
